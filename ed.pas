@@ -376,13 +376,18 @@ begin
         begin
           wLen := PWord(@anData[0])^;
           SetLength(Result, wLen);
-          Move(anData[2], Result[1], wLen);
+          if wLen > 0 then
+            Move(anData[2], Result[1], wLen);
         end;
       PT_VECTOR, PT_COLOR: Result := LTVectorToString(@anData[0]);
       PT_REAL: Result := FormatFloatSafe(PSingle(@anData[0])^);
       PT_FLAGS, PT_LONGINT: Result := FormatFloatSafeShort(PSingle(@anData[0])^);
       PT_BOOL: Result := IntToStr(PByte(@anData[0])^);
       PT_ROTATION: Result := LTRotationToString(@anData[0]);
+      else
+        begin
+          Result := Format('[Unknown sized %d]', [wDataSize])
+        end;
     end;
   end;
 end;

@@ -317,7 +317,12 @@ begin
     m_slLog.Add(Format('| | Property #%d', [nIndex]));
     m_slLog.Add(Format('| | | NameLength = %d', [wNameLength]));
     m_slLog.Add('| | | Name = ' + strName);
-    m_slLog.Add(Format('| | | DataType = %s', [PT_INDEX_TO_STR[nDataType]]));
+
+    if nDataType > PT_MAX then
+      m_slLog.Add(Format('| | | DataType = [Unknown %d]', [nDataType]))
+    else
+      m_slLog.Add(Format('| | | DataType = %s', [PT_INDEX_TO_STR[nDataType]]));
+
     m_slLog.Add(Format('| | | Flags = %d', [dwFlags]));
     m_slLog.Add(Format('| | | DataSize = %d', [wDataSize]));
     m_slLog.Add(Format('| | | Data = %s', [m_EDFile.PropDataToString(pProp)]));
@@ -347,7 +352,7 @@ var
 
 begin
   Application:=TApplication.Create(nil);
-  Application.Title:='ED Unpacker';
+  Application.Title := 'ED Unpacker';
   Application.Run;
   Application.Free;
 end.

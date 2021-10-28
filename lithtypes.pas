@@ -17,6 +17,7 @@ const
   PT_BOOL = 5;
   PT_LONGINT = 6;
   PT_ROTATION = 7;
+  PT_MAX = PT_ROTATION;
 
   PT_INDEX_TO_STR: array[0..PT_ROTATION] of string =
     ('String', 'Vector', 'Color', 'Real', 'Flags', 'Bool', 'LongInt', 'Rotation');
